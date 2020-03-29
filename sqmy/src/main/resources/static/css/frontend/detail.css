@@ -1,0 +1,36 @@
+.title{
+	text-align: center;
+	font-size:xx-large;
+}
+body {
+	background-image:  url("../../images/frontend/timg.jpg");
+}
+.sqmy{
+	text-align:center;
+	margin: 0 auto;
+	width:500px;
+	background-image:  url("../../images/frontend/back.jpg");
+}
+.left{
+	text-align:left;
+	display: inline-table;
+	font-size:20px;
+}
+.right{
+	text-align:right;
+    display: inline-table;
+}
+.jj{
+	margin: 0 auto;
+	width:500px;
+	text-align: center;
+}
+#tijiao{
+	width: 500px;
+	background-color: #11f40b;
+	color: white;
+}
+ul,li{
+	list-style-type:none;
+	margin:0px;  
+}  

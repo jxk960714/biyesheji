@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="../css/frontend/sqmylist.css">
+<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+<meta charset="utf-8">
+<title>社情民意系统</title>
+</head>
+<body>
+<label><img alt="" src="../images/frontend/用户.png"    width="20px"> <span id="username"></span>欢迎你</label><span id="mytime"></span><span class="kk"><button class="tc" id="tuichu"><img alt="" src="../images/frontend/退出.png"  width="20px"></button></span><br>
+<label><img alt="" src="../images/frontend/查询.png"  width="20px"><input type="search" id='search' class="search" placeholder='输入标题查询...' /></label>
+<div class="sqmyList">
+ <p><a href="/sqmy/frontend/sqmyadd"><img alt="" src="../images/frontend/add.png"  width="20px">添加社情民意</a><span style="margin-left: 50px"><a href="/sqmy/frontend/index">首页</a></span></p>
+    <div class="dropdown">
+        <button class="dropbtn">社情民意</button>
+        <div class="dropdown-content">
+        </div>
+    </div>
+    <div id="ll" style="display: inline-block"><table id="sqmylist"> </table>
+    </div>
+
+
+<div class="xia"> <input type="hidden" name="pageindex" id="pageindex" value="1"/>
+<p><a href="#" id="minpage">首页</a>&nbsp;&nbsp;
+    <a href="#" id="uppage">上一页</a>&nbsp;&nbsp;
+    <a href="#" id="lapage" >下一页</a>&nbsp;&nbsp;
+    <a href="#" id="maxpage">尾页</a></p>
+    <p>共有<span id="totalCount"></span>条数据，当前第<span id="currentPageNo"></span>/
+        <span id="max"></span>页</p>
+</div>
+</div>
+</body>
+<script type='text/javascript' src="../js/jquery.js"
+		charset='utf-8'></script>
+		 <script type='text/javascript' src='../js/frontend/sqmylist.js' charset='utf-8'></script>
+</html>

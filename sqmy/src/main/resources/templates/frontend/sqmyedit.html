@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th= "http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>社情民意系统</title>
+<link href="../css/frontend/demo.css" rel="stylesheet" type="text/css">
+<title>社情民意采集与管理系统</title>
+</head>
+<body>
+	<section id="getintouch" class="fadeInDownBig animated">
+		<div class="container" style="border-bottom: 0;">
+			<h1>
+				<span>修改社情民意</span>
+			</h1>
+		</div>
+		<div class="container">
+			<form class="contact" action="#" method="post" id="form">
+				<div>
+					<div class="lbl">
+						<label >主题</label>
+					</div>
+					<div class="ctrl">
+						<input type="text" id="title" name="title" data-required="true"
+							data-validation="text" data-msg="Invalid Name"
+							placeholder="Ex: John Donga">
+					</div>
+				</div>
+				<div >
+					<div class="lbl">
+						<label >类别</label>
+					</div>
+					<div class="ctrl">
+					<select id="category"></select>
+					</div>
+				</div>
+				<div>
+					<div class="ctrl">
+						<select id="jjcd">
+							<option>一级</option>
+							<option>二级</option>
+							<option>三级</option>
+						</select>
+					</div>
+				</div>
+				<div>
+					<div class="lbl">
+						<label >信息来源</label>
+					</div>
+					<div class="ctrl">
+						<input type="text" id="xxly" name="xxly" data-required="true"
+							data-validation="text" data-msg="Invalid Name"
+							placeholder="信息来源">
+					</div>
+				</div>
+				<div>
+					<div class="lbl">
+						<label>反映人</label>
+					</div>
+					<div class="ctrl">
+						<input type="text" id="fyr" name="fyr" data-required="true"
+							data-validation="text" data-msg="Invalid Name"
+							placeholder="反映人">
+					</div>
+				</div>
+				<div>
+					<div class="lbl">
+						<label>备注</label>
+					</div>
+					<div class="ctrl">
+						<input type="text" id="bz" name="bz" data-required="true"
+							data-validation="text" data-msg="Invalid Name"
+							placeholder="备注信息">
+					</div>
+				</div>
+				<div>
+					<div class="lbl">
+						<label >正文</label>
+					</div>
+					<div class="ctrl">
+						<textarea id="zw" name="zw" rows="6" cols="10"></textarea>
+					</div>
+				</div>
+				<div>
+					<div class="lbl">
+						<label>附件</label>
+					</div>
+					<div class="ctrl">
+						<input id="fj" multiple="multiple" name="fy" type="file">
+					</div>
+				</div>
+				<div >
+					<div class="span10 offset2">
+						<input name="submit" class="submit"  id="tijiao"
+							value="修改社情民意">
+						<input name="submit" class="submit"  id="goback"
+							   value="返回">
+					</div>
+				</div>
+			</form>
+		</div>
+	</section>
+</body>
+<script type='text/javascript' src="../js/jquery.js"
+	charset='utf-8'></script>
+<script type='text/javascript'
+	src='../js/frontend/sqmyedit.js' charset='utf-8'></script>
+<script type='text/javascript'
+	src='../js/common/commonutil.js' charset='utf-8'></script>
+</html>

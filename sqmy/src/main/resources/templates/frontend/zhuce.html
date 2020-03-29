@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../css/frontend/login.css">
+<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+<title>社情民意系统</title>
+</head>
+<body>
+<form class="pure-form pure-form-aligned">
+    <fieldset>
+        <div class="pure-control-group">
+            <label for="name">用户名</label>
+            <input id="name" type="text" placeholder="用户名">
+        </div>
+
+        <div class="pure-control-group">
+            <label for="password">密码</label>
+            <input id="password" type="password" placeholder="Password">
+        </div>
+        <div class="pure-control-group">
+            <label >职业类型:</label>
+            <select id="type">
+                <option selected="selected">请选择</option>
+                <option value="1">技能型</option>
+                <option value="2">事务型</option>
+                <option value="3">研究型</option>
+                <option value="4">艺术型</option>
+                <option value="5">经管型</option>
+                <option value="6">社交型</option>
+            </select>
+        </div>
+        <div class="pure-control-group">
+            <label >实际职业</label>
+            <select id="joblist">
+                <option selected="selected">请选择</option>
+            </select>
+
+        </div>
+
+        <div class="pure-control-group">
+            <label >验&nbsp; 证 &nbsp;码:</label>
+            <input id="j_captcha" type="text" placeholder="验证码">
+            <label> <img  id="captcha_img"alt="点击更换" src="../Kaptcha" 
+			onclick="changeVerifyCode(this)"/><br></label>
+        </div>
+        
+    </fieldset>
+</form>
+<div>
+
+ <div class="pure-control-group">
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      &nbsp; &nbsp; &nbsp; <button id="fanhui"class="button-secondary pure-button">返回登录</button>
+     <button id="zhuce" class="button-secondary pure-button">注              册</button>       
+        </div>
+
+</div> 
+</body>
+<script type='text/javascript' src="../js/jquery.js"
+		charset='utf-8'></script>
+		 <script type='text/javascript' src='../js/frontend/login.js' charset='utf-8'></script>
+		  <script type='text/javascript' src='../js/common/commonutil.js' charset='utf-8'></script>
+<script type='text/javascript' src='../js/frontend/zhuce.js' charset='utf-8'></script>
+</html>

@@ -1,0 +1,17 @@
+.content{
+    border: solid bisque;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+.title{
+    text-align: center;
+}
+.fj{
+    margin-left: 30px;
+}
+.zhengwen{
+    font-size: medium;
+    font-family: 宋体;
+    line-height: 2em;
+    margin: 2em 0em 2em 0em
+}

@@ -1,0 +1,84 @@
+
+a:link {  color: #000000; text-decoration: none}
+a:visited {  color: #000000; text-decoration: none}
+a:hover {  color: #000000; text-decoration: none}
+.xia{
+	text-align: right;
+}
+body {
+	background-color: #f8fff9;
+}
+.kk{
+	float: right;
+}
+.tc{
+	width: 100px;
+	background-color: #f8fff9;
+    border:3px solid #f0f1ef;
+}
+.content{
+	display:inline;
+	width: 250px;
+	margin-left: 30px;
+}
+#sqmylist{
+	display: inline;
+	text-align: center;
+	font-family: 宋体;
+	font-size: medium;
+	margin:0 auto;
+	border-spacing: 30px;
+}
+tr{
+	width: 100%;
+}
+td{ width: 130px;
+	border: thin solid #ffd1ce;
+	border-radius: 6px;
+	padding: 16px;
+}
+.dropbtn {
+	background-color: #f1d46b;
+	color: #ebffbf;
+	padding: 16px;
+	font-size: 16px;
+	border: none;
+	cursor: pointer;
+}
+.search{
+	border-radius:3px 4px 5px 6px;
+	border: solid yellow;
+	width: 15%;
+	font-family: 宋体;
+	font-size: medium;
+}
+.dropdown {
+	margin-right: 100px;
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+.dropdown:hover .dropbtn {
+	background-color: #3e8e41;
+}

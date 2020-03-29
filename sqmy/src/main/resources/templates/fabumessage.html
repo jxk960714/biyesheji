@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>社情民意采集与管理系统</title>
+    <link rel="stylesheet" href="../css/fabumessage.css">
+</head>
+<body>
+<a href="/sqmy/frontend/index">返回</a>
+<div class="message">
+
+    <div class="title"><span th:text="${fabu.sqmyTitle}"></span></div>
+    <div class="xxlyandtime">信息来源:<span th:text="${fabu.xxly}"></span>时间:<span th:text="${fabu.faBuTime}"></span></div>
+    <div class="zw" th:text="${fabu.sqmyZw}"></div>
+
+</div>
+<div style="float: left;font-family: 仿宋;font-size: small">CopyRight © 2020湖北工程学院 版权所有<br>
+    地址：湖北省孝感市交通大道272号<br>
+    电话：15926818069　技术支持：湖北工程学院</div>
+
+</body>
+</html>

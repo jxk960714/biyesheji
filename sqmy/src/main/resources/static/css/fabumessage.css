@@ -1,0 +1,22 @@
+
+
+.message{
+    border: solid bisque;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+.title{
+    text-align: center;
+}
+.xxlyandtime{
+    text-align: center;
+}
+.xxlyandtime span{
+    margin: 30px;
+}
+.zw{
+    font-family: 宋体;
+    font-size: medium;
+    line-height: 2em;
+    margin: 2em 0em 2em 0em
+}

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jxk.sqmy.dao.AdminDao">
+    <resultMap id="sqmyMap" type="com.jxk.sqmy.entity.Sqmy">
+        <id column="id" property="Id"/>
+        <result column="title" property="title"></result>
+        <result column="jjcd" property="jjcd"/>
+        <result column="xxly" property="xxly"/>
+        <result column="fyr" property="fyr"/>
+        <result column="bz" property="bz"/>
+        <result column="status" property="status"/>
+        <result column="zw" property="zw"/>
+        <result column="fj" property="fj"/>
+        <result property="tjtime" column="tjtime" jdbcType="TIMESTAMP"/>
+        <result property="isFaBu" column="isfabu"></result>
+        <result property="keyWord" column="keyword"></result>
+        <association property="category"
+                     column="first_category_id"
+                     javaType="com.jxk.sqmy.entity.Category">
+            <id column="id" property="id"></id>
+            <result column="category_name"
+                    property="categoryName"/>
+        </association>
+        <!--  <association property="bsDw" column="bsdw_id"
+                       javaType="com.jxk.sqmy.entity.Bsdw">
+              <id column="id" property="id"></id>
+              <result column="bsdwname" property="name"/>
+          </association>-->
+        <association property="user" column="userId"
+                     javaType="com.jxk.sqmy.entity.User">
+            <id column="userid" property="userId"/>
+            <result column="username" property="name"/>
+        </association>
+    </resultMap>
+    <resultMap id="userMap" type="com.jxk.sqmy.entity.User">
+        <id column="userid" property="userid"></id>
+        <result column="name" property="name"></result>
+        <result column="password" property="password"></result>
+        <result column="job" property="job"></result>
+        <result column="type" property="type"/>
+        <association property="role" column="roleid">
+            <id column="rd" property="roleId"></id>
+            <result column="rolename" property="roleName"></result>
+        </association>
+    </resultMap>
+    <select id="queryAllSqmyList" resultMap="sqmyMap">
+        select
+        s.id,
+        s.title,
+        s.jjcd,
+        s.xxly,
+        s.fyr,
+        s.bz,
+        s.status,
+        s.zw,
+        s.fj,
+        s.tjtime,
+        s.isfabu,
+        s.keyword,
+        u.name as username,
+        ca.category_name
+        from sqmy s,category ca,user u
+        <where>
+            s.status=1
+            and
+            s.category_id=ca.id
+            and
+            s.userId=u.userid
+            <if test="sqmy.title!=null">
+                and s.title like '%${sqmy.title}%'
+            </if>
+            <if test="sqmy.category.id!=0 and sqmy.category.id!=null ">
+                and s.category_id=#{sqmy.category.id}
+            </if>
+        </where>
+        order by jjcd asc
+        LIMIT #{rowIndex},#{pageSize};
+    </select>
+    <select id="queryalluser" resultMap="userMap">
+        select u.userid,u.name,u.password,u.job,u.type,r.roleid as rd
+        from user u,
+             role r
+        where u.roleid = r.roleid
+    </select>
+    <select id="queryExceptadmin" resultType="User">
+        select *
+        from user
+        where roleid = 1
+    </select>
+    <select id="querySqmyCount" resultType="java.lang.Integer">
+        select
+        count(1)
+        from sqmy s,category ca
+        <where>
+            s.status=1
+            and
+            s.category_id=ca.id
+            <if test="sqmy.title!=null">
+                and s.title like '%${sqmy.title}%'
+            </if>
+            <if test="sqmy.category.id!=0 and sqmy.category.id !=null ">
+                and s.category_id=#{sqmy.category.id}
+            </if>
+        </where>
+    </select>
+    <insert id="insertCategory"
+            parameterType="com.jxk.sqmy.entity.Category">
+        insert into
+            category(category_name)
+        values (#{categoryName})
+
+    </insert>
+    <!--发布时 修改是否发布-->
+    <update id="updateIsFaBu" parameterType="com.jxk.sqmy.entity.Sqmy">
+        update bysj.sqmy
+        set isfabu = 1
+        where title = #{title}
+    </update>
+    <select id="querySqmyByKeyWord" resultType="com.jxk.sqmy.entity.Sqmy">
+        select *
+        from sqmy
+        where keyword = #{sqmy.keyWord}
+    </select>
+
+    <insert id="inertbsdw" parameterType="com.jxk.sqmy.entity.Bsdw">
+        insert into
+            bsdw(name, number, phone, email)
+        values (#{name}, #{number}, #{phone}, #{email})
+    </insert>
+    <delete id="delcategory">
+        delete
+        from category
+        where id =
+              #{categoryId}
+    </delete>
+    <delete id="delSqmyByUserId">
+        delete
+        from sqmy
+        where userId = #{userid}
+    </delete>
+    <!-- 删除登录用户 -->
+    <delete id="deluser">
+        delete
+        from user
+        where userid =
+              #{userid}
+    </delete>
+    <!-- 修改一级类别 -->
+    <update id="xiugaiCategory"
+            parameterType="com.jxk.sqmy.entity.Category">
+        update category
+        <set>
+            <if test="categoryName!=null">category_name=#{categoryName},</if>
+
+        </set>
+        where id=#{id}
+
+    </update>
+    <update id="xiugaibsdw" parameterType="com.jxk.sqmy.entity.Bsdw">
+        update bsdw
+        <set>
+            <if test="name">name=#{name},</if>
+            <if test="number">number=#{number},</if>
+            <if test="phone">phone=#{phone},</if>
+            <if test="email">email=#{email},</if>
+
+        </set>
+        where id=#{id}
+
+    </update>
+    <update id="xiugaiuser" parameterType="com.jxk.sqmy.entity.User">
+        update user
+        <set>
+            <if test="name!=null">name=#{name},</if>
+            <if test="password!=null">password=#{password},</if>
+            <if test="job!=null">job=#{job},</if>
+            <if test="type!=null">type=#{type},</if>
+
+        </set>
+        where userid=#{userid}
+
+    </update>
+    <select id="querySqmyByUserandStatus" resultType="java.lang.Integer">
+        select
+            count(1)
+        from sqmy
+        where
+            status = 1
+          and userId = #{user.userid}
+
+    </select>
+    <select id="querySqmyByCategoryAndStatus" resultType="java.lang.Integer">
+        select
+            count(1)
+        from sqmy
+        where
+            status = 1
+          and category_id = #{category.id}
+    </select>
+</mapper>

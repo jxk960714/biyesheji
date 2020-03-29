@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>社情民意管理</title>
+    <link rel="stylesheet" href="../css/backend/manage.css">
+    <link rel="stylesheet" href="../css/backend/style.css">
+    <link rel="stylesheet" href="../css/backend/dropmenu.css">
+</head>
+<body>
+<div class="top-head">
+<div class="header-nav">
+    <div class="contain">
+        <ul class="nav-list">
+            <li>
+                <a href="/sqmy/frontend/index">首页<span class="trig"></span></a>
+            </li>
+            <li>
+                <a href="/sqmy/backend/manage">民意管理<span class="trig"></span></a>
+
+            </li>
+            <li>
+                <a href="/sqmy/backend/tongjitu">民意统计<span class="trig"></span></a>
+
+            </li>
+            <li>
+                <a href="/sqmy/backend/categorymanage">类别管理<span class="trig"></span></a>
+
+            </li>
+            <li>
+                <a href="/sqmy/backend/usermanage">用户管理<span class="trig"></span></a>
+
+            </li>
+        </ul>
+    </div>
+</div>
+    <span style="font-family: cursive; font-size: large;">尊敬的管理员</span><span id="adminname"></span><span
+        style="float:right; "><span id="mytime"></span><button id="tuichu" class="tc">退出</button></span>
+
+    <input type="search" id='search' placeholder='输入主题查询...' class="search"/>
+    <div class="dropdown">
+        <button class="dropbtn">社情民意类别</button>
+        <div class="dropdown-content" id="categorymenu">
+        </div>
+    </div>
+
+</div>
+<div class="container" >
+    <div>
+        <table id="sqmylist"></table>
+        <div class="xia"><input type="hidden" name="pageindex" id="pageindex" value="1"/>
+            <p><a href="#" id="minpage">首页</a>&nbsp;&nbsp;
+                <a href="#" id="uppage">上一页</a>&nbsp;&nbsp;
+                <a href="#" id="lapage">下一页</a>&nbsp;&nbsp;
+                <a href="#" id="maxpage">尾页</a></p>
+            <p>共有<span id="totalCount"></span>条数据，当前第<span id="currentPageNo"></span>/
+                <span id="max"></span>页</p>
+        </div>
+    </div>
+</div>
+
+</body>
+<script src="https://cdn.bootcss.com/echarts/4.6.0/echarts-en.common.js"></script>
+<script type='text/javascript' src="../js/jquery.js"
+        charset='utf-8'></script>
+<script type='text/javascript' src='../js/backend/manage.js' charset='utf-8'></script>
+
+</html>

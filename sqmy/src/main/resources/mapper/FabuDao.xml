@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jxk.sqmy.dao.FabuDao">
+
+    <resultMap type="com.jxk.sqmy.entity.Fabu" id="FabuMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="sqmyTitle" column="sqmy_title" jdbcType="VARCHAR"/>
+        <result property="sqmyZw" column="sqmy_zw" jdbcType="VARCHAR"/>
+        <result property="sqmyCategory" column="sqmy_category" jdbcType="VARCHAR"/>
+        <result property="sqmyJjcd" column="sqmy_jjcd" jdbcType="INTEGER"/>
+        <result property="keyWord" column="keyword" jdbcType="VARCHAR"/>
+        <result property="faBuTime" column="fabutime" jdbcType="VARCHAR"/>
+        <result property="xxly" column="xxly" jdbcType="VARCHAR"></result>
+
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="FabuMap">
+        select
+            id, sqmy_title, sqmy_zw, sqmy_category, sqmy_jjcd,fabutime ,xxly
+        from bysj.fabu
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="FabuMap">
+        select
+          id, sqmy_title, sqmy_zw, sqmy_category, sqmy_jjcd,fabutime ,xxly
+        from bysj.fabu
+        limit #{offset}, #{limit}
+    </select>
+    <select id="queryFabuByKeyWord" resultMap="FabuMap">
+        select
+            id, sqmy_title, sqmy_zw, sqmy_category, sqmy_jjcd
+            from bysj.fabu
+            where  keyword=#{fabu.keyWord}
+
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="FabuMap">
+        select
+          id, sqmy_title, sqmy_zw, sqmy_category, sqmy_jjcd
+        from bysj.fabu
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="sqmyTitle != null and sqmyTitle != ''">
+                and sqmy_title = #{sqmyTitle}
+            </if>
+            <if test="sqmyZw != null and sqmyZw != ''">
+                and sqmy_zw = #{sqmyZw}
+            </if>
+            <if test="sqmyCategory != null and sqmyCategory != ''">
+                and sqmy_category = #{sqmyCategory}
+            </if>
+            <if test="sqmyJjcd != null">
+                and sqmy_jjcd = #{sqmyJjcd}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into bysj.fabu(sqmy_title, sqmy_zw, sqmy_category, sqmy_jjcd,keyword,fabutime,xxly)
+        values (#{sqmyTitle}, #{sqmyZw}, #{sqmyCategory}, #{sqmyJjcd},#{keyWord},#{faBuTime},#{xxly})
+    </insert>
+    <!--通过主键修改数据-->
+    <update id="update">
+        update bysj.fabu
+        <set>
+            <if test="sqmyTitle != null and sqmyTitle != ''">
+                sqmy_title = #{sqmyTitle},
+            </if>
+            <if test="sqmyZw != null and sqmyZw != ''">
+                sqmy_zw = #{sqmyZw},
+            </if>
+            <if test="sqmyCategory != null and sqmyCategory != ''">
+                sqmy_category = #{sqmyCategory},
+            </if>
+            <if test="sqmyJjcd != null">
+                sqmy_jjcd = #{sqmyJjcd},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from bysj.fabu where id = #{id}
+    </delete>
+
+</mapper>

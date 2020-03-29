@@ -1,0 +1,23 @@
+ul li{
+    list-style-type: none;
+    border-bottom:1px solid #4a51ff;
+    font-family: 宋体;
+    font-size:medium;
+}
+.sqmygsb{
+
+    width: 70%;
+    border:1px solid #F00;
+    border-radius:3px 4px 5px 6px;
+
+    margin-left: 100px;
+}
+.title{
+    text-align: center;
+}
+.fbsj{
+    float: right;
+}
+a{
+    text-decoration: none;
+}

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jxk.sqmy.dao.SqmyDao">
+    <resultMap id="sqmyMap" type="com.jxk.sqmy.entity.Sqmy">
+        <id column="id" property="Id"/>
+        <result column="title" property="title"></result>
+        <result column="jjcd" property="jjcd"/>
+        <result column="xxly" property="xxly"/>
+        <result column="fyr" property="fyr"/>
+        <result column="bz" property="bz"/>
+        <result column="status" property="status"/>
+        <result column="zw" property="zw"/>
+        <result column="fj" property="fj"/>
+        <result column="isfabu" property="isFaBu"></result>
+        <association property="bsDw"
+                     column="bsdw_id"
+                     javaType="com.jxk.sqmy.entity.Bsdw">
+            <id column="id" property="id"></id>
+            <result column="name"
+                    property="name"/>
+        </association>
+        <association property="category"
+                     column="category_id"
+                     javaType="com.jxk.sqmy.entity.Category">
+            <id column="id" property="id"></id>
+            <result column="categoryname"
+                    property="categoryName"/>
+        </association>
+    </resultMap>
+    <select id="querySqmybyId" resultMap="sqmyMap">
+        SELECT
+            s.id,
+            s.title,
+            s.jjcd,
+            s.xxly,
+            s.fyr,
+            s.bz,
+            s.status,
+            s.zw,
+            s.fj,
+            ca.category_name as categoryname
+        from sqmy s,
+             category ca
+        where
+            s.category_id = ca.id
+          and
+            s.id = #{sqmyId}
+    </select>
+    <select id="querySqmyListByUserId" resultMap="sqmyMap">
+        select
+        s.id,
+        s.title,
+        s.jjcd,
+        s.xxly,
+        s.fyr,
+        s.bz,
+        s.status,
+        s.zw,
+        s.fj,
+        s.isfabu,
+        ca.category_name as categoryname
+        from category ca,sqmy s
+        <where>
+            s.category_id=ca.id
+            and
+            s.userId=#{sqmy.user.userid}
+            <if test="sqmy.title!=null">
+                and s.title like '%${sqmy.title}%'
+            </if>
+            <if test="sqmy.category.id!=0 and sqmy.category.id !=null ">
+                and s.category_id=#{sqmy.category.id}
+            </if>
+        </where>
+        order by jjcd asc
+        LIMIT #{rowIndex},#{pageSize}
+    </select>
+    <select id="getCategory" resultType="com.jxk.sqmy.entity.Category">
+        select *
+        from category
+    </select>
+    <select id="querySqmyCount" resultType="int">
+        select
+        count(1)
+        from category ca ,sqmy s
+        <where>
+            s.category_id=ca.id
+            and
+            s.userId=#{sqmy.user.userid}
+            <if test="sqmy.title!=null">
+                and s.title like '%${sqmy.title}%'
+            </if>
+            <if test="sqmy.category.id!=0 and sqmy.category.id !=null ">
+                and s.category_id=#{sqmy.category.id}
+            </if>
+        </where>
+    </select>
+
+    <select id="getBsdw" resultType="com.jxk.sqmy.entity.Bsdw">
+        select *
+        from bsdw
+    </select>
+    <insert id="insertSqmy" parameterType="Sqmy">
+        insert into
+            sqmy(title, category_id, jjcd, xxly,
+                 fyr, bz, fj, status, zw, userId,keyword)
+        values (#{title}, #{category.id},
+                #{jjcd}, #{xxly}, #{fyr}, #{bz}, #{fj}, #{status}, #{zw}, #{user.userid},#{keyWord})
+    </insert>
+    <delete id="delsqmy">
+        delete
+        from sqmy
+        where id = #{id}
+    </delete>
+    <delete id="delSqmyByCateId">
+        delete
+        from sqmy
+        where category_id = #{cateId}
+    </delete>
+    <update id="xiugaisqmy" parameterType="com.jxk.sqmy.entity.Sqmy">
+        update sqmy
+        <set>
+            <if test="title!=null">title=#{title},</if>
+            <if test="jjcd!=null">jjcd=#{jjcd},</if>
+            <if test="xxly!=null">xxly=#{xxly},</if>
+            <if test="fyr!=null">fyr=#{fyr},</if>
+            <if test="bz!=null">bz=#{bz},</if>
+            <if test="zw!=null">zw=#{zw},</if>
+            <if test="fj">fj=#{fj},</if>
+            <if test="category!=null">category_id=#{category.id},</if>
+        </set>
+        where id=#{Id}
+    </update>
+</mapper>
+ 
+ 
+ 

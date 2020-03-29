@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jxk.sqmy.dao.UserDao">
+
+    <resultMap type="com.jxk.sqmy.entity.User" id="UserMap">
+        <result property="userid" column="userid" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="job" column="job" jdbcType="VARCHAR"/>
+        <result property="type" column="type" jdbcType="VARCHAR"/>
+        <association property="role" column="roleid" javaType="com.jxk.sqmy.entity.Role">
+            <id property="roleId" column="roleid"></id>
+            <result property="roleName" column="rolename"></result>
+        </association>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="UserMap">
+        select
+          s.userid, s.name, s.password, s.job, s.type, s.roleid ,r.rolename r.roleid
+        from bysj.user s,role r
+        where s.userid = #{userid} and s.roleid=r.roleid
+    </select>
+    <select id="queryUser" resultMap="UserMap">
+        select
+            s.userid, s.name, s.password, s.job, s.type, s.roleid, r.rolename,r.roleid
+         from bysj.user s, role r
+        where s.name = #{user.name} and password =#{user.password} and s.roleid=r.roleid
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="UserMap">
+        select
+          userid, name, password, job, type, roleid
+        from bysj.user
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="UserMap">
+        select
+          userid, name, password, job, type, roleid
+        from bysj.user
+        <where>
+            <if test="userid != null">
+                and userid = #{userid}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="password != null and password != ''">
+                and password = #{password}
+            </if>
+            <if test="job != null and job != ''">
+                and dept = #{dept}
+            </if>
+            <if test="type != null and type != ''">
+                and type = #{type}
+            </if>
+            <if test="roleid != null">
+                and roleid = #{roleid}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="userid" useGeneratedKeys="true" parameterType="User">
+        insert into bysj.user(name, password, job, type, roleid)
+        values (#{name}, #{password}, #{job}, #{type}, #{role.roleId})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update bysj.user
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+            <if test="job != null and job != ''">
+                dept = #{dept},
+            </if>
+            <if test="type != null and type != ''">
+                type = #{type},
+            </if>
+            <if test="roleid != null">
+                roleid = #{roleid},
+            </if>
+        </set>
+        where userid = #{userid}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from bysj.user where userid = #{userid}
+    </delete>
+
+</mapper>
