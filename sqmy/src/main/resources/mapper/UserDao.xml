@@ -27,7 +27,12 @@
          from bysj.user s, role r
         where s.name = #{user.name} and password =#{user.password} and s.roleid=r.roleid
     </select>
-
+    <select id="queryUserByUserName" resultMap="UserMap">
+        select
+            s.userid, s.name, s.password, s.job, s.type, s.roleid, r.rolename,r.roleid
+        from bysj.user s, role r
+        where s.name = #{username}and s.roleid=r.roleid
+    </select>
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="UserMap">
         select

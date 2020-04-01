@@ -56,4 +56,5 @@ public interface UserService {
      * 登录
      */
     User queryUser(User user);
+    User queryUserByUserName(String username);
 }

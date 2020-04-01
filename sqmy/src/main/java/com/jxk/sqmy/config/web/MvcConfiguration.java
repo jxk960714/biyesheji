@@ -33,7 +33,7 @@ import com.jxk.sqmy.intercepter.MyIntercepter;
 public class MvcConfiguration implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new MyIntercepter()).addPathPatterns("/frontend/denglu").excludePathPatterns("/js/**").excludePathPatterns("/images/**").excludePathPatterns("images/**");
+		registry.addInterceptor(new MyIntercepter()).addPathPatterns("/frontend/denglu");
 	}
 
 

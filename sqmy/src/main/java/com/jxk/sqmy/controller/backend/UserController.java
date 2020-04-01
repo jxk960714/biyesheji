@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.jxk.sqmy.util.JiaMi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,7 +45,7 @@ public class UserController {
 		user.setJob(job);
 		user.setUserid(userid);
 		user.setName(username);
-		user.setPassword(password);
+		user.setPassword(JiaMi.MD5Pwd(username,password));
 		user.setType(type);
 		int x=adminService.xiugaiuser(user);
 		if(x>0) {
@@ -57,6 +58,7 @@ public class UserController {
 	@PostMapping("/addUser")
 	public Map<String,Object> addUser(@RequestBody User user){
 		Map<String, Object> modelMap = new HashMap<String, Object>();
+		user.setPassword(JiaMi.MD5Pwd(user.getName(),user.getPassword()));
 		Role role=new Role();
 		role.setRoleId(1);
 		user.setRole(role);

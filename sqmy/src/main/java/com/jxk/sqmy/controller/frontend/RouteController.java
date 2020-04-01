@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping(value = "frontend", method = { RequestMethod.GET,
 		RequestMethod.POST })
-public class AdminController {
+public class RouteController {
 	@RequestMapping(value = "index", method = RequestMethod.GET)
 	private String index() {
 		return "index";

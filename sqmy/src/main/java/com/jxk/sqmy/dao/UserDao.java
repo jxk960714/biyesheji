@@ -65,5 +65,6 @@ public interface UserDao {
      * 登录的方法
      */
     User queryUser(@Param("user") User user);
+    User queryUserByUserName(String username);
 
 }

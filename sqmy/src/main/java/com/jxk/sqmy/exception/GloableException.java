@@ -1,9 +1,4 @@
 package com.jxk.sqmy.exception;
-
-
-
-import com.alibaba.fastjson.JSON;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
@@ -11,48 +6,33 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
+
 @ControllerAdvice
 public class GloableException {
-    @ExceptionHandler(Exception.class)
-    public Object errorHandler(HttpServletRequest reqest,
-                               HttpServletResponse response, Exception e) throws Exception {
-        if (isAjax(reqest)) {
-            response.setCharacterEncoding("UTF-8");
-            response.setContentType("application/json; charset=utf-8");
-            PrintWriter writer = response.getWriter();
-            //具体操作
-            writer.write(JSON.toJSONString(Result.errorOf(HttpStatus.NOT_FOUND.value(), e.getMessage())));
-            //
-            writer.flush();
-            writer.close();
-            return null;
-            //return Result.errorOf(HttpStatus.NOT_FOUND.value(), e.getMessage());
-        } else {
-            ModelAndView mav = new ModelAndView();
-            mav.addObject("exception", e.getMessage());
-            mav.addObject("url", reqest.getRequestURL());
-            mav.setViewName("exception/sysexception");
-            return mav;
+    @ExceptionHandler(value = Exception.class)
+    public Object errorHandler(HttpServletRequest request, HttpServletResponse response, Exception e) throws Exception {
+        e.printStackTrace();
+        //判断请求是否为Ajax请求
+        if (isAjax(request)) { //如果是的话，就直接返回错误信息
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("exception/sysexception"); //这里需要在templates文件夹下新建一个error.html文件用作错误页面
+            return modelAndView;
+        } else { //如果不是的话，就跳转到错误页面
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("exception/sysexception"); //这里需要在templates文件夹下新建一个error.html文件用作错误页面
+            return modelAndView;
         }
     }
 
-    public static boolean isAjax(HttpServletRequest httpRequest) {
-        return (httpRequest.getHeader("X-Requested-With") != null
-                && "XMLHttpRequest"
-                .equals(httpRequest.getHeader("X-Requested-With").toString()));
+    /**
+     * 判断是否是Ajax请求
+     *
+     * @param request
+     * @return
+     */
+    public boolean isAjax(HttpServletRequest request) {
+        return (request.getHeader("X-Requested-With") != null &&
+                "XMLHttpRequest".equals(request.getHeader("X-Requested-With").toString()));
     }
 
-   /* @ResponseBody
-    public ModelAndView myExceptionHandler(Exception ex) {
-        MyException e = null;
-        if (ex instanceof MyException) {
-            e = (MyException) ex;
-        } else {
-            e = new MyException("系统正在维护");
-        }
-        ModelAndView mv = new ModelAndView();
-        mv.addObject("errMsg", e.getMsg());
-        mv.setViewName("exception/sysexception");
-        return mv;
-    }*/
 }
