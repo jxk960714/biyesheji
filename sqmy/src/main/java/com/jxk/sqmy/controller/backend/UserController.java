@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.jxk.sqmy.util.JiaMi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,14 +39,11 @@ public class UserController {
 	@RequestMapping(value = "/xiugaiuser", method = RequestMethod.POST)
 	private Map<String, Object> xiugaiuser(HttpServletRequest request, @RequestParam("userid") Integer userid,
 			@RequestParam("username") String username, @RequestParam("password") String password,
-			@RequestParam("job") String job, @RequestParam("type") String type) {
+			@RequestParam("job") String job, @RequestParam("type") String type,@RequestParam("roleId") Integer roleId) {
 		Map<String, Object> modelMap = new HashMap<String, Object>();
-		User user=new User();
-		user.setJob(job);
+		User user=new User(username,password,job,type ,new Role(roleId));
+		user.setPassword(JiaMi.MD5Pwd(username,password));
 		user.setUserid(userid);
-		user.setName(username);
-		user.setPassword(password);
-		user.setType(type);
 		int x=adminService.xiugaiuser(user);
 		if(x>0) {
 			modelMap.put("success", true);
@@ -55,11 +53,11 @@ public class UserController {
 
 	}
 	@PostMapping("/addUser")
-	public Map<String,Object> addUser(@RequestBody User user){
+	public Map<String,Object> addUser(@RequestParam("username") String username,@RequestParam("password")String password,@RequestParam("job")String job,@RequestParam("type")String type,@RequestParam("roleId")Integer roleId){
 		Map<String, Object> modelMap = new HashMap<String, Object>();
-		Role role=new Role();
-		role.setRoleId(1);
-		user.setRole(role);
+		Role role=new Role(roleId);
+		User user=new User(username,password,job,type,role);
+		user.setPassword(JiaMi.MD5Pwd(user.getName(),user.getPassword()));
 		if(userUservice.insert(user)>0) {
 			modelMap.put("success",true);
 			return modelMap;

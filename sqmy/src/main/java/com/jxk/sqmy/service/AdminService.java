@@ -9,14 +9,13 @@ import com.jxk.sqmy.entity.Sqmy;
 import com.jxk.sqmy.entity.User;
 
 public interface AdminService {
-	public List<Sqmy> queryAllSqmyList( Sqmy sqmy ,int pageIndex,int pageSize);
+	public List<Sqmy> queryAllSqmyList(Sqmy sqmy, int pageIndex, int pageSize);
 	public int querySqmyCount(Sqmy sqmy);
 	public int tg(int sqmyId);
 	public int btg(int sqmyId);
 	public  int insertCategory(Category Category);
 	public boolean delcategory(int categoryId);
 	public List<User> queryalluser();
-	public List<User> queryExceptadmin();
 	public int xiugaiCategory(Category fCategory);//修改类别
 	public int xiugaibsdw(Bsdw bsdw);//修改报送单位
 	public int xiugaiuser(User user);//修改登录用户

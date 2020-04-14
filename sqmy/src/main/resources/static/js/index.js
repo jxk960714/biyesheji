@@ -1,5 +1,5 @@
 var pageIndex = $('#pageIndex').val();
-function getFabu(){
+function getFabuList(){
     var fabuHtml='';
     $.getJSON("/sqmy/index/"+pageIndex, function(data){
         if(data.success){
@@ -11,16 +11,16 @@ function getFabu(){
     });
 
 }
-getFabu();
+getFabuList();
 
 $('#syy').on("click",function () {
      pageIndex = pageIndex * 1 - 1;
     if (pageIndex <= 0) {
         pageIndex = 1;
     }
-   getFabu();
+   getFabuList();
 });
 $('#yyy').on("click",function () {
      pageIndex = pageIndex * 1 + 1;
-    getFabu();
+    getFabuList();
 });

@@ -66,11 +66,6 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return adminDao.queryalluser();
 	}
-
-	@Override
-	public List<User> queryExceptadmin() {
-		return  adminDao.queryExceptadmin();
-	}
 	@Override
 	public int xiugaiCategory(Category Category) {
 		// TODO Auto-generated method stub
@@ -108,7 +103,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public List<Integer> getSqmyCountByUserAndAtatus() {
-		List<User> userList=adminDao.queryExceptadmin();
+		List<User> userList=adminDao.queryalluser();
 		List<Integer> countList=new ArrayList<>();
 		for (int i = 0; i <userList.size() ; i++) {
 			int number=adminDao.querySqmyByUserandStatus(userList.get(i));

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping(value = "backend", method = { RequestMethod.GET,
 		RequestMethod.POST })
-public class BackEndAdminController {
+public class BackEndRouteController {
 	@RequestMapping(value = "tongjitu", method = RequestMethod.GET)
 	private String tongjitu() {
 		return "backend/tongjitu";

@@ -1,0 +1,24 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /sqmy
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://129.204.219.88:3307/bysj?characterEncoding=utf8
+      password: root
+      username: root
+  thymeleaf:
+    cache: false
+    mode: HTML
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+  tengxun:
+    accessKey:
+mybatis:
+  config-location: classpath:mybaties-config.xml
+  type-aliases-package: com.jxk.sqmy.entity
+  mapper-locations: classpath:mapper/**.xml

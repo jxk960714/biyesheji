@@ -25,13 +25,8 @@ $('#denglu').click(function () {
 		success : function(data) {
 			if(data.success){
 				console.log(data.user.roleId);
-				if(data.user.role.roleId==1){
-					window.location.href='/sqmy/frontend/sqmylist';
-				}else if(data.user.role.roleId==2){
-					window.location.href='/sqmy/backend/manage';
-				}
-				alert("登录成功");
-					
+                alert("登录成功");
+					window.location.href='/sqmy/index';
 			}else{
 				alert(data.errMsg);
 				loginCount++;
@@ -55,6 +50,10 @@ $('#zhuce').click(function () {
 		return;
 	} else {
 		needVerify = true;
+	}
+	if (name==''||password==''){
+		alert("用户名和密码不能为空");
+		return;
 	}
 	$.ajax({
 		type : "post",

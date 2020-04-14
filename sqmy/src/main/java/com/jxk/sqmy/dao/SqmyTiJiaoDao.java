@@ -16,5 +16,5 @@ import java.util.Date;
 @Mapper
 public interface SqmyTiJiaoDao {
     public int getstatus(@Param("sqmyid") int sqmyid);
-    public  boolean fabu(@Param("sqmyid") int sqmyid ,@Param("tjtime") String date);
+    public  boolean fabu(@Param("sqmyid") int sqmyid, @Param("tjtime") String date);
 }

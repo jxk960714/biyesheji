@@ -54,6 +54,6 @@ public interface FabuService {
      */
     boolean deleteById(Integer id);
     boolean  fabu(Fabu fabu);
-    List<Fabu> getFabu( int pageIndex,int limit);
+    List<Fabu> getFabu(int pageIndex, int limit);
 
 }

@@ -6,11 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping(value = "frontend", method = { RequestMethod.GET,
 		RequestMethod.POST })
-public class AdminController {
-	@RequestMapping(value = "index", method = RequestMethod.GET)
-	private String index() {
-		return "index";
-	}
+public class FrontendRouteController {
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	private String login() {
 		return "frontend/login";

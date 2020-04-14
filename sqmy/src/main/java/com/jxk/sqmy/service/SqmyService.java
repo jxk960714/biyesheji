@@ -9,7 +9,7 @@ public interface SqmyService {
 	public List<Category> getCategory();
 	public int insertSqmy(Sqmy sqmy);
 	public List<Bsdw> getBsdw();
-	public List<Sqmy> querySqmyListByUserId(Sqmy sqmy,int pageIndex,int pageSize);
+	public List<Sqmy> querySqmyListByUserId(Sqmy sqmy, int pageIndex, int pageSize);
 	public int querySqmyCount(Sqmy sqmy);
 	public int delsqmy(int id);
 	public int xiugaisqmy(Sqmy sqmy);

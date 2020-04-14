@@ -2,28 +2,15 @@ package com.jxk.sqmy.config.web;
 
 import javax.servlet.ServletException;
 
-import com.sun.xml.internal.bind.v2.TODO;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
-
 import com.google.code.kaptcha.servlet.KaptchaServlet;
 import com.jxk.sqmy.intercepter.MyIntercepter;
 
@@ -33,15 +20,15 @@ import com.jxk.sqmy.intercepter.MyIntercepter;
 public class MvcConfiguration implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new MyIntercepter()).addPathPatterns("/frontend/denglu").excludePathPatterns("/js/**").excludePathPatterns("/images/**").excludePathPatterns("images/**");
+		registry.addInterceptor(new MyIntercepter()).addPathPatterns("/frontend/denglu");
 	}
-
-
-
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-
-		registry.addResourceHandler("/upload/**").addResourceLocations("file:E:/beji/file/");
-
+	@Override
+	public void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("/**")
+				.allowedOrigins("*")
+				.allowCredentials(true)
+				.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+				.maxAge(3600);
 	}
 //处理文件上传
 	@Bean(name = "multipartResolver")

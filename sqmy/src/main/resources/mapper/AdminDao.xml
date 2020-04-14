@@ -79,7 +79,7 @@
         LIMIT #{rowIndex},#{pageSize};
     </select>
     <select id="queryalluser" resultMap="userMap">
-        select u.userid,u.name,u.password,u.job,u.type,r.roleid as rd
+        select u.userid,u.name,u.password,u.job,u.type,r.roleid as rd ,rolename
         from user u,
              role r
         where u.roleid = r.roleid
@@ -177,6 +177,7 @@
             <if test="password!=null">password=#{password},</if>
             <if test="job!=null">job=#{job},</if>
             <if test="type!=null">type=#{type},</if>
+            <if test="role!=null">roleid=#{role.roleId},</if>
 
         </set>
         where userid=#{userid}

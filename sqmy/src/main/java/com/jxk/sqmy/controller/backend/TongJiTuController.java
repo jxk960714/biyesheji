@@ -1,6 +1,7 @@
 package com.jxk.sqmy.controller.backend;
 
 import com.jxk.sqmy.entity.Category;
+import com.jxk.sqmy.entity.Data;
 import com.jxk.sqmy.entity.User;
 import com.jxk.sqmy.service.AdminService;
 import com.jxk.sqmy.service.SqmyService;
@@ -27,7 +28,7 @@ public class TongJiTuController {
     private SqmyService sqmyService;
     @GetMapping("/zhuxing")
     public Result<Map>getZhuxing(){
-        List<User> userList=adminService.queryExceptadmin();
+        List<User> userList=adminService.queryalluser();
 
         List<String> usernameList=new LinkedList<>();
         List<Integer> countList=adminService.getSqmyCountByUserAndAtatus();
@@ -37,6 +38,12 @@ public class TongJiTuController {
         Map<String,Object> resultMap=new HashMap();
         resultMap.put("usernameList",usernameList);
         resultMap.put("countList",countList);
+        List<Data> dataList=new ArrayList<>();
+        System.out.println(userList.size()==countList.size());
+        for (int i = 0; i <userList.size() ; i++) {
+            dataList.add(new Data(userList.get(i).getName(),countList.get(i)));
+        }
+        resultMap.put("dataList",dataList);
         return new Result<Map>("成功",resultMap);
 
     }

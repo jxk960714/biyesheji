@@ -23,6 +23,16 @@ public class User implements Serializable {
     
     private Role role;
 
+    public User() {
+    }
+
+    public User( String name, String password, String job, String type, Role role) {
+        this.name = name;
+        this.password = password;
+        this.job = job;
+        this.type = type;
+        this.role = role;
+    }
 
     public Integer getUserid() {
         return userid;

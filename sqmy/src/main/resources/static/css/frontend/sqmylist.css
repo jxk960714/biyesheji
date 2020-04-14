@@ -11,10 +11,20 @@ body {
 .kk{
 	float: right;
 }
-.tc{
-	width: 100px;
-	background-color: #f8fff9;
-    border:3px solid #f0f1ef;
+.kk label{
+	margin: 20px;
+}
+.kk span{
+	 width: 50px;
+ }
+#xgmm{
+	margin: 50px;
+}
+#xgmm input{
+	height: 30px;
+}
+#mymessage{
+	width: 50px;
 }
 .content{
 	display:inline;

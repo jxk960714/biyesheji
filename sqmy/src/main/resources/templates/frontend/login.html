@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8">
-<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
-<link rel="stylesheet" href="../css/frontend/login.css">
-<title>社情民意系统</title>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" th:href="@{/favicon.ico}"/>
+    <link rel="bookmark" th:href="@{/favicon.ico}"/>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+    <link rel="stylesheet" href="../css/frontend/login.css">
+    <title>社情民意系统</title>
 </head>
 <body>
 <h2 class="head"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-     &nbsp;<span>基于web的社情民意采集与管理系统</span></h2>
+    &nbsp;<span>基于web的社情民意采集与管理系统</span></h2>
 <form class="pure-form pure-form-aligned">
     <fieldset>
         <div class="pure-control-group">
@@ -23,20 +25,21 @@
         <div class="pure-control-group">
             <label>验&nbsp; 证 &nbsp;码:</label>
             <input id="j_captcha" type="text" placeholder="验证码">
-            <label> <img  id="captcha_img"alt="点击更换" src="../Kaptcha" 
-			onclick="changeVerifyCode(this)"/><br></label>
+            <label> <img id="captcha_img" alt="点击更换" src="../Kaptcha"
+                         onclick="changeVerifyCode(this)"/><br></label>
         </div>
-        
+
     </fieldset>
 </form>
- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-      &nbsp; &nbsp; &nbsp;<button id="tozhuce"class="button-secondary pure-button">注册</button>
-   <button id="denglu" class="button-secondary pure-button">提交</button>
-   
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp;<button id="tozhuce" class="button-secondary pure-button">注册</button>&nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp;
+<button id="denglu" class="button-secondary pure-button">提交</button>
+
 </body>
 <script type='text/javascript' src="../js/jquery.js"
-		charset='utf-8'></script>
-		 <script type='text/javascript' src='../js/frontend/login.js' charset='utf-8'></script>
-		 <script type='text/javascript' src='../js/common/commonutil.js' charset='utf-8'></script>
+        charset='utf-8'></script>
+<script type='text/javascript' src='../js/frontend/login.js' charset='utf-8'></script>
+<script type='text/javascript' src='../js/common/commonutil.js' charset='utf-8'></script>
 </html>

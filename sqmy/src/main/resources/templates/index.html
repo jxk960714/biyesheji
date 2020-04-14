@@ -1,26 +1,92 @@
-<html>
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title>社情民意采集与管理系统</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="../css/index.css">
+    <link rel="shortcut icon" th:href="@{/favicon.ico}"/>
+    <link rel="bookmark" th:href="@{/favicon.ico}"/>
+    <link rel="stylesheet" href="css/index.css">
+    <title>社情民意系统首页</title>
+    <script>
+        //定义全局变量
+        var imgDom = null;
+        var n = 0;
+        var intervalDom = null;
+        var tt = 2000;
+        var imgs = null;
+        var imgArr = ["images/one.jpg", "images/two.jpg", "images/three.jpg", "images/four.jpg", "images/five.jpg", "images/six.jpg"]
+        //页面加载完后执行
+        window.onload = function () {//初始化变量
+            imgDom = document.getElementsByTagName("img")[0];
+            imgs = document.getElementsByClassName("imgs");
+            intervalDom = setInterval(next, tt);
+        }
+
+        function next() {     //点击下一页事件
+            n++;
+            if (n >= imgArr.length) {
+                n = 0;
+            }
+            imgDom.setAttribute("src", imgArr[n]);
+            addBorder();
+        }
+
+        function shang() {     //点击上一页事件
+            n--;
+            if (n < 0) {
+                n = imgArr.length - 1;
+            }
+            imgDom.setAttribute("src", imgArr[n]);
+            addBorder();
+        }
+
+        function stop() {     //鼠标移上停止轮播
+            clearInterval(intervalDom);
+        }
+
+        function start() {     //鼠标移开继续轮播
+            intervalDom = setInterval(next, tt);
+        }
+
+        function addBorder() {     //轮播时同时改变图片对应缩略图的样式
+            for (var i = 0; i < imgs.length; i++) {
+                imgs[i].style.border = "";     //其他图片样式为空
+            }
+            imgs[n].style.border = "1px solid red";    //对应缩略图样式改变
+        }
+
+        function change(obj, num) {     //点击缩略图跳转到点击的图片,并改变此缩略图的样式
+            for (var k = 0; k < imgs.length; k++) {
+                imgs[k].style.border = "";     //其他图片样式为空
+            }
+            obj.style.border = "1px solid red";     //改变本缩略图样式
+            n = num;
+            imgDom.setAttribute("src", imgArr[n]);    //改变图片
+        }
+
+
+    </script>
 </head>
 <body>
-<header>
-    <div class="title">社情民意公布榜 <span style="float: right"><a href="/sqmy/frontend/login">登录</a></span></div>
+<header class="head">
+    <div style="text-align: center;font-family: 仿宋 ;font-size: x-large">社情民意采集管理系统</div>
 </header>
-<div class="sqmygsb">
-    <input type="hidden" name="pageindex" id="pageIndex" value="1"/>
-    <ul id="fabulist">
-    </ul>
-    <div style="text-align: center">
-       <span id="syy"><</span>&nbsp;&nbsp;&nbsp;<span id="yyy">></span>
+<div class="menu">
+    <div style="margin-left:10%"><span><a href="/sqmy/index">主页</a></span>
+        <span class="title"><a href="/sqmy/sqmyfabulist">民意公布榜</a></span>
+        <span class="title"><a href="/sqmy/frontend/sqmylist">社情民意的提交</a></span>
+        <span class="title"><a href="/sqmy/backend/manage">社情民意审核管理</a></span>
+        <span class="title"><a href="/sqmy/backend/tongjitu">社情民意统计</a></span>
+        <span class="title"><a href="/sqmy/aboutme">关于我们</a></span>
+        <span class="title"><a href="/sqmy/frontend/login">登录</a></span>
     </div>
 </div>
-<div style="float: left;font-family: 仿宋;font-size: small">CopyRight © 2020湖北工程学院 版权所有<br>
+<div>
+    <img src="images/one.jpg" alt="" onMouseOver="stop()" onMouseOut="start()" width="100%" height="300px">
+</div>
+<button onClick="shang()">上一张</button>
+<button onClick="next()">下一张</button>
+<div style=" text-align:center;font-family: 仿宋;font-size: small;background-color: #969696 ;height:100%">CopyRight © 2020湖北工程学院 版权所有<br>
     地址：湖北省孝感市交通大道272号<br>
     电话：15926818069　技术支持：湖北工程学院</div>
 </body>
-<script type='text/javascript' src="../js/jquery.js"
-        charset='utf-8'></script>
-<script type='text/javascript' src='../js/index.js' charset='utf-8'></script>
 </html>

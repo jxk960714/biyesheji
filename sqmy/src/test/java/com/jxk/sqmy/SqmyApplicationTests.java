@@ -29,12 +29,8 @@ class SqmyApplicationTests {
     @Autowired
             private  FabuService fabuService;
 
-   // @Test
+    @Test
     void contextLoads() {
-       /* Fabu fabu1=new Fabu();
-        fabu1.setSqmyTitle("dasd");*/
-       Sqmy sqmy=new Sqmy();
-        System.out.println(adminService.queryAllSqmyList(sqmy,0,4).get(0).getIsFaBu());
 
     }
     @Test

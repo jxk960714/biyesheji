@@ -1,5 +1,6 @@
 var title = '';
 var categoryId='';
+var userdata;
 function showTime() {
 	nowtime = new Date();
 	year = nowtime.getFullYear();
@@ -33,7 +34,7 @@ function aaa() {
 					url,
 					function(data) {
 						if (data.success) {
-							$('#username').html(data.user.name);
+							userdata=data.user;
 							var sqmylistHtml = '<tr><td>序号</td><td>主题</td><td>类别</td><td>紧急程度</td><td>反映人</td><td>查看</td><td>修改</td><td>删除</td><td>提交</td><td style="width: 100px">状态</td></tr>';
 							var sqmycategotyHtml='';
                             data.categoryList.map(function (item,index){
@@ -125,19 +126,53 @@ function del(id,status) {
 	}
 }
 
-$('.kk').click(function() {
-	$.ajax({
-		type : "get",
-		url : '/sqmy/frontend/tuichu',
-		dataType : "json",
-		success : function(data) {
-			if (data) {
-				window.location.href = '/sqmy/frontend/login';
-			}
-
-		}
-	});
+$('#mymessage').click(function () {
+    $('#my').html("<br/>用户名:"+userdata.name+"<br>工作："+userdata.job+"<br>工作类型："+userdata.type+"<br><a style='color: #11f40b' href='/sqmy/frontend/sqmylist'>确定</a><span style='color: #f1d46b' onclick='xgPassword()'><img src='../images/xgpassword.png' width='20px'>修改密码</span><span style='color: red' onclick='zhuxiao();'><img src='../images/frontend/zhuxiao.png' width='20px'>注销</span>");
 });
+function  zhuxiao() {
+    $.ajax({
+        type: "get",
+        url: '/sqmy/frontend/tuichu',
+        dataType: "json",
+        success: function (data) {
+            if (data) {
+                window.location.href = '/sqmy/index';
+            }
+
+        }
+    })
+}
+function xgPassword() {
+	$('#xgmm').html('密码：<input type="password" id="password">再次输入密码：<input type="password" id="repassword"><button onclick="passwordxg()">修改</button>')
+}
+function passwordxg() {
+	var userid=userdata.userid;
+	var username=userdata.name;
+	alert(username)
+	var password=$('#password').val();
+	var repassword=$('#repassword').val();
+	if(password!=repassword){
+		alert("两次密码输入不一样")
+		return;
+	}
+    $.ajax({
+        type : "post",
+        url : '/sqmy/xgpassword',
+        data : {
+            "userid": userid,
+			"username":username,
+			"password" :password
+        },
+        dataType : "json",
+        success : function(data) {
+            if (data.success) {
+                alert("修改成功");
+                window.location.href = '/sqmy/frontend/sqmylist';
+            }
+
+        }
+    });
+}
 function chakan(id) {
 	window.location.href = '/sqmy/frontend/sqmyzhengwen?sqmyid=' + id;
 }
