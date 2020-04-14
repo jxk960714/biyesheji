@@ -35,18 +35,8 @@ class SqmyApplicationTests {
     }
     @Test
     void  testdenglu(){
-        User user=new User();
-        user.setName("jxk22");
-        user.setPassword("12322");
-        Role role =new Role();
-        role.setRoleId(1);
-        user.setRole(role);
-        System.out.println(userService.insert(user));
-       /* Sqmy sqmy =new Sqmy();
-        sqmy.setUser(user);
-        System.out.println(sqmyService.querySqmyListByUserId(sqmy,0,8));*/
-
-        //System.out.println(userService.queryUser(user).getUserid());
+        User user = userService.queryUserByUserName("admin");
+        System.out.println(user.getRole().getRoloName());
     }
     @Test
     public  void  testsqueryjob(){

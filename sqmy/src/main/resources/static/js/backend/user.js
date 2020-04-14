@@ -78,14 +78,10 @@ function delUser(userid, roleId) {
     }
 }
 function xguser(userid,roleId ,name, password, job, type ) {
-    if(roleId==2){
-        alert("管理员的账号不能修改");
-        return;
-    }
     $('.caozuouser').html(
         '用户名:<input type="text" id="username" value="' + name
         + '">密码:<input  id="password"type="text" value="'
-        + password + '">职业类型:<select id="type" onchange="jobtype();"><option selected="selected">'+type+'</option><option value="1">技能型</option><option value="2">事务型</option><option value="3">研究型</option><option value="4">艺术型</option><option value="5">经管型</option> <option value="6">社交型</option></select><label >实际职业</label><select id="joblist"><option selected="selected">'+job+'</option></select><label>用户类型</label><select id="usertype"><option>请选择</option><option value="1">普通用户</option><option value="2">管理员</option></select><button onclick="xiugaiuser(' + userid
+        + password + '">职业类型:<select id="type" onchange="jobtype();"><option selected="selected">'+type+'</option><option value="1">技能型</option><option value="2">事务型</option><option value="3">研究型</option><option value="4">艺术型</option><option value="5">经管型</option> <option value="6">社交型</option></select><label >实际职业</label><select id="joblist"><option selected="selected">'+job+'</option></select><label>用户类型</label><select id="usertype"><option value="1" selected>普通用户</option><option value="2">管理员</option></select><button onclick="xiugaiuser(' + userid
         + ')">修改</button>')
 }
 function xiugaiuser(userid) {
@@ -121,7 +117,7 @@ $('#adduser')
         function() {
             $('.caozuouser')
                 .html(
-                    '用户名:<input type="text" id="username">密码:<input type="password" id="password">职业类型:<select id="type" onchange="jobtype();"><option selected="selected">请选择</option><option value="1">技能型</option><option value="2">事务型</option><option value="3">研究型</option><option value="4">艺术型</option><option value="5">经管型</option> <option value="6">社交型</option></select><label >实际职业</label><select id="joblist"><option selected="selected">请选择</option></select><label>用户类型</label><select id="usertype"><option>请选择</option><option value="1">普通用户</option><option value="2">管理员</option></select><button onclick="adduser();">增加</button>');
+                    '用户名:<input type="text" id="username">密码:<input type="password" id="password">职业类型:<select id="type" onchange="jobtype();"><option selected="selected">请选择</option><option value="1">技能型</option><option value="2">事务型</option><option value="3">研究型</option><option value="4">艺术型</option><option value="5">经管型</option> <option value="6">社交型</option></select><label >实际职业</label><select id="joblist"><option selected="selected">请选择</option></select><label>用户类型</label><select id="usertype"><option value="1" selected>普通用户</option><option value="2">管理员</option></select><button onclick="adduser();">增加</button>');
         });
     function jobtype(){
         let value=$("#type").find('option:selected').val();

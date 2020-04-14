@@ -3,14 +3,20 @@ package com.jxk.sqmy.realm;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import com.jxk.sqmy.entity.Role;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.cache.Cache;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
+import org.apache.shiro.web.filter.mgt.DefaultFilterChainManager;
+import org.apache.shiro.web.filter.mgt.PathMatchingFilterChainResolver;
+import org.apache.shiro.web.servlet.AbstractShiroFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.jxk.sqmy.entity.User;
@@ -19,6 +25,7 @@ import com.jxk.sqmy.service.UserService;
 public class UserRealm extends AuthorizingRealm {
     @Autowired
     private UserService userService;
+
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 // 这里做权限控制
@@ -28,20 +35,31 @@ public class UserRealm extends AuthorizingRealm {
         info.addRole(user.getRole().getRoloName());
         return info;
     }
+
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
 // 这里做登录控制
         AuthenticationInfo info;
-        UsernamePasswordToken token = (UsernamePasswordToken)authenticationToken;
+        UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         String username = token.getUsername();
         User user = userService.queryUserByUserName(username);
-        String userPwd=user.getPassword();
+        String userPwd = user.getPassword();
         if (user == null) {
             throw new UnknownAccountException("用户名或密码错误！");
         }
 
         ByteSource salt = ByteSource.Util.bytes(username);
         return new SimpleAuthenticationInfo(username, userPwd, salt, getName());
+    }
+
+    public void clearAllCachedAuthorizationInfo2() {
+        Cache<Object, AuthorizationInfo> cache = getAuthorizationCache();
+        if (cache != null) {
+            for (Object key : cache.keys()) {
+                System.out.println(key+":"+key.toString());
+                cache.remove(key);
+            }
+        }
     }
 
 }

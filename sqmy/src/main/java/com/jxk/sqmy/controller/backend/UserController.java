@@ -5,7 +5,10 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.jxk.sqmy.realm.UserRealm;
 import com.jxk.sqmy.util.JiaMi;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.mgt.RealmSecurityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,7 +51,9 @@ public class UserController {
 		if(x>0) {
 			modelMap.put("success", true);
 		}
-
+		RealmSecurityManager rsm = (RealmSecurityManager) SecurityUtils.getSecurityManager();
+		UserRealm realm = (UserRealm) rsm.getRealms().iterator().next();
+		realm.clearAllCachedAuthorizationInfo2();
 		return modelMap;
 
 	}
