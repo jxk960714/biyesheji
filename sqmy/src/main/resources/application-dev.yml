@@ -16,8 +16,8 @@ spring:
     prefix: classpath:/templates/
     suffix: .html
     encoding: UTF-8
-  tengxun:
-    accessKey:
+    tengxun:
+      accessKey:
 mybatis:
   config-location: classpath:mybaties-config.xml
   type-aliases-package: com.jxk.sqmy.entity
